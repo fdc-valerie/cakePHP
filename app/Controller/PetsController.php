@@ -6,7 +6,15 @@ class PetsController extends AppController{
 	}
 	public $uses =array('Customer','Pet');
 	
-	public function index($id){
+	public function index($id = null){
+		if(!$id){
+			$message= 'Error! You need customer id inorder to view pets';
+				$this->Flash->error($message,array(
+					'key' => 'positive'
+				)
+			);
+		}
+		isset($id) ? $id : $this->redirect(array('controller' => 'customers', 'action' => 'index'));
 		$id = $this->request->pass[0];
 		$pets=$this->set('pets', $this->Pet->find('all',array(
 			'joins' => array(
@@ -30,7 +38,15 @@ class PetsController extends AppController{
 			)
 		);
 	}
-	public function add($id){
+	public function add($id = null){
+		if(!$id){
+			$message= 'Error! You need customer id inorder to add new pet';
+				$this->Flash->error($message,array(
+					'key' => 'positive'
+				)
+			);
+		}
+		// isset($id) ? $id : $this->redirect(array('controller' => 'customers', 'action' => 'index'));
 		if($this->request->is('post')){
 			$this->Pet->create();
 			if(empty($this->request->data)){
@@ -71,7 +87,10 @@ class PetsController extends AppController{
 			$this->set('customers', $this->Customer->findByid($id));
 	}
 
-	public function edit($id){
+	public function edit($id = null){
+		if(!$id){
+			exit;
+		}
 		if($this->request->is('post')){
 			if(empty($this->request->data)){
 			echo 'Invalid! Picture must be less than 5mb. <br>';
@@ -120,7 +139,8 @@ class PetsController extends AppController{
 		}
 	}
 			
-			$this->set('pets',$this->Pet->findByid($id));
+			$data =$this->Pet->findByid($id);
+			$this->request->data=$data;
 	}
 
 	public function delete($id){

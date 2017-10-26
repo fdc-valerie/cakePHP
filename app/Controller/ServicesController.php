@@ -5,10 +5,15 @@ class ServicesController extends AppController{
 	var $helpers = array('Html', 'Form','Csv');
 
 	public function index(){
-		$id=$this->request->pass[0];
-		pr($id);
+	
 	}
-	public function add($id){
+	public function add($id = null){
+		if(!$id){
+			$message= 'You need an id inorder to add services';
+				$this->Flash->error($message,array(
+				)
+			);
+		}
 		if($this->request->is('post')){
 			$this->Pet->id=$id;
 			$this->Service->create();
@@ -18,6 +23,9 @@ class ServicesController extends AppController{
 						'key' => 'positive'
 					)
 				);
+			}else{
+				$message= 'Error! You need pet id inorder to add services!';
+					$this->Flash->error($message);
 			}
 		}
 		$this->set('pets', $this->Pet->findByid($id));
@@ -28,7 +36,12 @@ class ServicesController extends AppController{
 		$data = $this->Service->find('all');
 		return json_encode($data);
 	}
-	public function services($id){
+	public function availServices($id = null){
+		if(!$id){
+			$message= 'Error! You need an id inorder to view Availed Services' ;
+			$this->Flash->error($message);
+		}
+		isset($id) ? $id : $this->redirect(array('controller' => 'customers', 'action' => 'index'));
 		$id = $this->request->pass[0];
 		$services=$this->set('services', $this->Service->find('all',array(
 			'joins' => array(
@@ -38,7 +51,7 @@ class ServicesController extends AppController{
 		            'type' => 'INNER',
 		            'conditions' => array(
 		                  'Service.pet_id' => $id,
-		                    'pet.id' => $id,
+		                    // 'pet.id' => $id,
 		                    'Service.pet_id=pet.id'
 		                )
 					),
@@ -51,8 +64,13 @@ class ServicesController extends AppController{
 				)
 			)
 		);
+
 	}
-	public function edit($id){
+
+	public function edit($id = null){
+		if(!$id){
+			$this->redirect(array('controller' => 'customers','action' => 'index'));
+		}
 		if($this->request->is('post')){
 			$this->Service->id=$id;
 			if($this->Service->save($this->request->data)){

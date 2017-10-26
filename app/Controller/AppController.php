@@ -49,7 +49,7 @@ class AppController extends Controller {
 	          'fields'=>array('username'=>'username','password'=>'password'),
 	        )
 	      ),
-	      'loginRedirect' => array('controller' => 'Users', 'action' => '../users/index'),
+	      'loginRedirect' => array('controller' => 'Users', 'action' => '/../services'),
 	      'logoutRedirect' => array('controller' => 'Users', 'action' => 'login'),
 	      'loginAction' => array('controller' => 'Users', 'action' => 'login'),
 	      'authError' => 'You must be logged in to view this page.',

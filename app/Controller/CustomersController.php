@@ -37,9 +37,18 @@ class CustomersController extends AppController{
 		}
 	}
 
-	public function edit($id){
-		if($this->request->is('post')){
+	public function edit($id = null){
+		if(!$id){
+			$message= 'Error! You need an id inorder to update customer information';
+				$this->Flash->error($message,array(
+					'key' => 'positive'
+				)
+			);
+		}
+		if($this->request->is(array('post','put'))){
+
 			$this->Customer->id=$id;
+
 			$this->Customer->save($this->request->data);
 				$message = 'Data Successfully Updated!';
 				$this->Flash->success($message, array(
@@ -51,8 +60,11 @@ class CustomersController extends AppController{
 						'action' => 'index'
 						)
 					);
+		} else {
+			$data = $this->Customer->findByid($id);
+			$this->request->data = $data;
 		}
-			$this->set('customers', $this->Customer->findByid($id));
+			
 	}
 
 	public function delete($id){

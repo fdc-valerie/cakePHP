@@ -42,7 +42,7 @@ $service=$services['Service'];
 			  	<div class="col-sm-4">
 			  		<div class="form-group">
 						<div class="col-sm-4">
-						<input type="input" class="form-control" name="data[Services][id]"  value="<?php echo $service['id'] ?>"/>
+						<input type="hidden" class="form-control" name="data[Services][id]"  value="<?php echo $service['id'] ?>"/>
 						</div>
 					</div>
 

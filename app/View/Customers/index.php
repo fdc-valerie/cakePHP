@@ -60,7 +60,9 @@
 	 		<?php endforeach; ?>
 	 </tbody>
  </table>
+ 
 </div>
+
 
 <?php  
 	echo $this->Paginator->numbers();

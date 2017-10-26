@@ -57,7 +57,7 @@ class UsersController extends AppController{
 					}
 				}else{
 					$message = __('Username or Password is incorrect');
-					$this->Session->setFlash('<div class="alert alert-danger">'.$message.'</div>');
+					$this->Flash->error('<div class="alert alert-danger">'.$message.'</div>');
 				}
 			}else{
 				$this->autoRender=false;

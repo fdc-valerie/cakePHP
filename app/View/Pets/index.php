@@ -10,7 +10,7 @@ img {
                     <li class="active">Pets</li>
 </ul>
 
-<?php foreach ($pets as $key => $pet): ?>
+<?php foreach ($pets as  $pet): ?>
 <!-- <?php echo $this->Html->css('https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css',array('inline' => false)) ?> -->
  <div class="pull-left">
 		
@@ -65,7 +65,7 @@ img {
 						?>
 						<?php 
 							echo $this->Html->link(__('View Avail Services', true), array( 
-								'action' => '../services/services', $pet['Pet']['id']), array(
+								'action' => '../services/availservices', $pet['Pet']['id']), array(
 								'class' => 'btn btn-info'
 								)
 							); 

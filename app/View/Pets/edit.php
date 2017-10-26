@@ -17,33 +17,21 @@
 
                     <div style="padding-top:30px" class="panel-body" >
 
-<?php 
-// $customer=$customers['Customer'];
-$pet=$pets['Pet'];
-?>
 
 <?php echo $this->Flash->render('positive') ?>
             <?php   echo $this->Form->create('Pet',array(
                 'type' => 'file')
             );
-                    // echo $this->Form->input('customer_id',array(
-                    //     'type'=>'hidden',
-                    //     'value' =>  $customer['id']
-                    //         )
-                    // );
             		echo $this->Form->input('name',array(
             			'class' => 'form-control',
-                        'value' => $pet['name']
             			)
             		);
                      echo $this->Form->input('species', array(
                         'class' => 'form-control',
-                        'value' =>  $pet['species']
                         )
                     );
             		echo $this->Form->input('breed',array(
             			'class' => 'form-control',
-                        'value'	=> $pet['breed']
             			)
             		);
                     echo $this->Form->input('gender', array(
@@ -53,13 +41,11 @@ $pet=$pets['Pet'];
                         ),
                     'empty' => '(choose one)',
                     'class' => 'form-control',
-                    'value' => $pet['gender'],
                     )
                 );
 
             		echo $this->Form->input('age',array(
             			'class' => 'form-control',
-                        'value' => $pet['age']	
             			)
             		);
 

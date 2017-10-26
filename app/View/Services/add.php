@@ -34,7 +34,7 @@
 	<?php echo $this->Flash->render('positive') ?>
 
 	<?php 
-        $pet=$pets['Pet'];
+        $pet = (isset($pets['Pet'])) ? $pets['Pet'] : header('Location: http://local.cakephp.com/customers/index/');
     ?>
 
  	<form action ="/services/add/<?php echo $pet['id'] ?>" method="POST" class="form-horizontal" role="form">
