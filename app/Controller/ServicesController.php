@@ -9,8 +9,9 @@ class ServicesController extends AppController{
 	}
 	public function add($id = null){
 		if(!$id){
-			$message= 'You need an id inorder to add services';
+			$message= 'You need pet id inorder to add services';
 				$this->Flash->error($message,array(
+					'key' => 'positive'
 				)
 			);
 		}
@@ -71,6 +72,8 @@ class ServicesController extends AppController{
 		if(!$id){
 			$this->redirect(array('controller' => 'customers','action' => 'index'));
 		}
+		pr('HALLOWEEN');
+		exit;
 		if($this->request->is('post')){
 			$this->Service->id=$id;
 			if($this->Service->save($this->request->data)){
