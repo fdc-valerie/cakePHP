@@ -4,9 +4,7 @@
                     <li class="active">Edit Pet Info</li>
 
 </ul>
-<button class ="btn btn-danger"><a href = "javascript:history.back()">Back to previous page</a></button>
 <div class="container">
-
 <div id="loginbox" style="margin-left: 250px;" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">    
 
             <div class="panel panel-default" >

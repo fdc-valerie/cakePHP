@@ -36,6 +36,7 @@ class PetsController extends AppController{
 			'conditions' => array(
 				'Pet.customer_id' => $id,
 				),
+			// 'limit' => 2,
 			
 				)
 			)
@@ -94,7 +95,7 @@ class PetsController extends AppController{
 		if(!$id){
 			exit;
 		}
-		if($this->request->is('post')){
+		if($this->request->is(array('post','put'))){
 			if(empty($this->request->data)){
 			echo 'Invalid! Picture must be less than 5mb. <br>';
 		}else{
@@ -129,14 +130,10 @@ class PetsController extends AppController{
 		
 			$this->Pet->id=$id;
 			if($this->Pet->save($fileUpload)){
+				$this->successMsg();
 				if($pic['size']){
 					move_uploaded_file($tmp,IMAGES.'image'.DS.time().$pic['name']);
-					$message = 'Successfully updated!';
-					$this->Flash->success($message,array(
-						'key' => 'positive'
-						)
-					);
-				$this->redirect($this->referer());
+					$this->successMsg();
 				}
 			}
 		}
@@ -146,6 +143,18 @@ class PetsController extends AppController{
 			$this->request->data=$data;
 	}
 
+	public function successMsg(){
+			$message = 'Data Successfully Updated!';
+					$this->Flash->success($message, array(
+						'key' => 'positive'
+						)
+					);
+					$this->redirect(array(
+						'controller' => 'Customers', 
+							'action' => 'index'
+						)	
+					);
+	}
 	public function delete($id){
 		
 		$this->autoRender=false;
