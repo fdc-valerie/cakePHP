@@ -51,8 +51,6 @@ class ServicesController extends AppController{
 		            'alias' => 'pet',
 		            'type' => 'INNER',
 		            'conditions' => array(
-		                  'Service.pet_id' => $id,
-		                    // 'pet.id' => $id,
 		                    'Service.pet_id=pet.id'
 		                )
 					),
@@ -61,7 +59,9 @@ class ServicesController extends AppController{
 						'Service.*',
 						'pet.*',
 					),
-			
+				'conditions' => array(
+					'Service.pet_id' => $id,
+					),
 				)
 			)
 		);

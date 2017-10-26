@@ -23,8 +23,8 @@ class PetsController extends AppController{
 		            'alias' => 'customer',
 		            'type' => 'INNER',
 		            'conditions' => array(
-		                  'Pet.customer_id' => $id,
-		                    'customer.id' => $id,
+		                  // 'Pet.customer_id' => $id,
+		                  //   'customer.id' => $id,
 		                    'Pet.customer_id=customer.id'
 		                )
 					),
@@ -33,6 +33,9 @@ class PetsController extends AppController{
 						'customer.*',
 						'Pet.*',
 					),
+			'conditions' => array(
+				'Pet.customer_id' => $id,
+				),
 			
 				)
 			)
