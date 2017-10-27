@@ -7,7 +7,7 @@ class CustomersController extends AppController{
 
 	public function index(){
 		// $customer = $this->paginate('Customer');
-
+		$this->Customer->virtualFields['birthdate'] = 'YEAR(CURDATE()) - YEAR(birthdate) - IF(STR_TO_DATE(CONCAT(YEAR(CURDATE()), "-", MONTH(birthdate), "-", DAY(birthdate)) ,"%Y-%c-%e") > CURDATE(), 1, 0)';
 		$customers = $this->paginate=array(
 				'Customer'=> array(
 					'fields' => array(

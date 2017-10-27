@@ -23,6 +23,7 @@
 	 	<th>First Name</th>
 	 	<th>Middle Name</th>
 	 	<th>Last Name</th>
+	 	<th>Age</th>
 	 	<th>Contact #</th>
 	 	<th>Address</th>
 	 	<th>Action</th>
@@ -35,6 +36,7 @@
 	 		<td><?php echo $customer['Customer']['first_name'] ?></td>
 	 		<td><?php echo $customer['Customer']['middle_name'] ?></td>
 	 		<td><?php echo $customer['Customer']['last_name'] ?></td>
+	 		<td><?php echo $customer['Customer']['birthdate'] ?></td>
 	 		<td><?php echo $customer['Customer']['contact_no'] ?></td>
 	 		<td><?php echo $customer['Customer']['address'] ?></td>
 	 		<td>

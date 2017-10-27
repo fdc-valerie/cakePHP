@@ -15,6 +15,7 @@
                     echo $this->Form->input('middle_name', array('class'=> 'form-control'));
                     echo $this->Form->input('last_name', array('class' => 'form-control'));
                     echo $this->Form->input('contact_no', array('class'=> 'form-control'));
+                    echo $this->Form->input('birthdate', array('class'=> 'form-control', 'id' => 'birthdate', 'type' => 'text'));
                     echo $this->Form->input('address', array('class'=> 'form-control'));
                     echo $this->Form->button(__('Add'), 
                     [
@@ -28,5 +29,9 @@
         </div>
     </div>
 </div>
+<script>
+$(document).ready(function(){
+    $('#birthdate').attr('type', 'date');
+});
 
-                        
+</script>

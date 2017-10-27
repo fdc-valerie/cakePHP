@@ -32,6 +32,12 @@
             'class'=> 'form-control',
             )
         );
+        echo $this->Form->input('birthdate', array('
+            class'=> 'form-control', '
+            id' => 'birthdate', 
+            'type' => 'text'
+            )
+        );
         echo $this->Form->input('address', array(
             'class'=> 'form-control',
             )
@@ -44,3 +50,5 @@
       );
       echo $this->Form->end();
 ?> 
+
+<?php echo $this->Html->script('jquery')?>
