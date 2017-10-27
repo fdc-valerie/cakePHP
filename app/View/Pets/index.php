@@ -15,10 +15,12 @@ img {
  <div class="pull-left">
 		
 </div>
+
  <div class="container">
   <div class="row">
-	    <div class="col-xs-5" style="padding-left:0;padding-right:0">	
-			<div class="panel panel-default panel-table" >
+	<?php echo $this->Flash->render('positive') ?>
+	    <div class="col-xs-5" style="padding-left:0;padding-right:0">
+ 			<div class="panel panel-default panel-table" >
 				<div class="panel-heading" style="padding:18px" >
 					<?php echo $pet['Pet']['name']; ?>
 						<div class="pull-right">
@@ -51,7 +53,7 @@ img {
 									<label>Breed:</label>  <?php echo $pet['Pet']['breed']; ?><br>
 									<label>Age:</label>  <?php echo $pet['Pet']['age']; ?><br>
 									<label>Gender:</label>  <?php echo $pet['Pet']['gender']; ?><br>
-										
+							
 							</div>
 						</div>	
 					</div>
@@ -74,7 +76,14 @@ img {
 					</div>	
 				</div>
 			</div>
-		<?php endforeach; ?> 	
+		<?php endforeach; ?> 
+		<h1 align="center">
+			<?php 
+				if(!$pets){
+					echo "No records found";
+				}	 
+			?>	
+		</h1>
 	</div> 
 </div> 
 

@@ -4,7 +4,7 @@ class PetsController extends AppController{
 	function beforeFilter(){
 		parent::beforeFilter();
 	}
-	public $uses =array('Customer','Pet');
+	public $uses =array('Customer','Pet','Service');
 	
 	public function index($id = null){
 		if(!$id){
@@ -41,6 +41,9 @@ class PetsController extends AppController{
 				)
 			)
 		);
+
+
+
 	}
 	public function add($id = null){
 		if(!$id){
@@ -49,6 +52,11 @@ class PetsController extends AppController{
 					'key' => 'positive'
 				)
 			);
+			$this->redirect(array('controller' => 'customers', 'action' => 'index'));
+		}
+		$idx= $this->Customer->findByid($id);
+		if(!sizeof($idx) > 0){
+			$this->redirect(array('controller' => 'customers', 'action' => 'index'));
 		}
 		// isset($id) ? $id : $this->redirect(array('controller' => 'customers', 'action' => 'index'));
 		if($this->request->is('post')){
@@ -58,8 +66,6 @@ class PetsController extends AppController{
 			}else{
 				$data=$this->request->data;
 				$pet = $data['Pet'];
-
-				$this->Customer->id=$id;
 
 				$fileUpload= array(
 					'name' => $pet['name'],
@@ -81,20 +87,30 @@ class PetsController extends AppController{
 						'key' => 'positive'
 						)
 					);
-					$this->redirect($this->referer());
+					$this->redirect(array('action' => 'index/'.$id));
 				}else{
 					echo 'Error! Cannot move the file';
 				}
 			}
-
 		}
-			$this->set('customers', $this->Customer->findByid($id));
+			
 	}
 
 	public function edit($id = null){
 		if(!$id){
-			exit;
+			$message= 'Error! You need pet id inorder to update pet info';
+				$this->Flash->error($message,array(
+					'key' => 'positive'
+				)
+			);
+			$this->redirect(array('controller' => 'customers', 'action' => 'index'));
 		}
+
+		$idx= $this->Pet->findByid($id);
+		if(!sizeof($idx) > 0){
+			$this->redirect(array('controller' => 'customers', 'action' => 'index'));
+		}
+
 		if($this->request->is(array('post','put'))){
 			if(empty($this->request->data)){
 			echo 'Invalid! Picture must be less than 5mb. <br>';
@@ -156,12 +172,42 @@ class PetsController extends AppController{
 					);
 	}
 	public function delete($id){
-		
 		$this->autoRender=false;
 		$this->Pet->id=$id;
-		$this->Pet->delete($id);
-		$this->redirect($this->referer());
-	}
+	
+		$services=$this->Service->find('all',array(
+			'joins' => array(
+				array(
+				'table' => 'pets',
+		            'alias' => 'pet',
+		            'type' => 'INNER',
+		            'conditions' => array(
+		                    'Service.pet_id=pet.id'
+		                )
+					),
+				),
+			'conditions' => array(
+				'Service.pet_id' => $id,
+				),
+			)
+		);
+		
 
+		if($this->Pet->delete($id)){
+			$message = 'Successfully deleted!';
+				$this->Flash->success($message, array(
+					'key' => 'positive'
+					)
+				);
+			foreach ($services as $service){
+				$this->Service->delete($service['Service']['id']);
+			}
+			$this->redirect(array(
+			'controller' => 'Customers', 
+			'action' => 'index'
+				)
+			);
+		}
+	}	
 }
 ?>

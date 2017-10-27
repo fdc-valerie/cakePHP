@@ -20,6 +20,11 @@
 	 </tr>
 	 </thead>
 	<tbody>
+			<?php 
+				if(!$services){
+					echo '<tr><td colspan="30"><h1 align="center">No records found 	</h1></td></tr>';
+				}	 
+			?>	
 		<?php foreach ($services as $key => $services): ?>
 			<tr>
 				<td><?php echo $services['Service']['id'] ?></td>

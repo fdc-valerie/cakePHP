@@ -12,8 +12,8 @@
             </div>     
                 <div style="padding-top:30px" class="panel-body" >
                     <?php 
-                         $customer = (isset($customers['Customer'])) ? $customers['Customer'] : header('Location: http://local.cakephp.com/customers/index/');
-                        // $customer=$customers['Customer'];
+                        //  $customer = (isset($customers['Customer'])) ? $customers['Customer'] : header('Location: http://local.cakephp.com/customers/index/');
+                        // // $customer=$customers['Customer'];
 
                     ?>
                         <?php echo $this->Flash->render('positive') ?>
@@ -22,8 +22,10 @@
                                 );
                                         echo $this->Form->input('customer_id',array(
                                             'type'=>'hidden',
-                                            'value' =>  $customer['id']
-                                                )
+                                            // 'value' =>  $this->request->pass[0],
+                                            'value' =>  (isset($this->request->pass[0])) ? $this->request->pass[0] : ''
+                                            )
+                                           
                                         );
                                 		echo $this->Form->input('name',array(
                                 			'class' => 'form-control'

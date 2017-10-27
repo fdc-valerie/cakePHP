@@ -4,7 +4,7 @@
 					<li class="active">Customers</li>
 </ul>
 <div class="container">
-<?php echo $this->Flash->render('positive') ?>
+
 
  <table class="table table-hover">
  <?php echo $this->Html->link("Add Customer", array(
@@ -14,6 +14,8 @@
 		)
 	) 
 ?>
+
+<?php echo $this->Flash->render('positive') ?>
 
 	 <thead>
 	 <tr>

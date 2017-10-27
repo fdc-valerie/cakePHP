@@ -14,6 +14,11 @@ class ServicesController extends AppController{
 					'key' => 'positive'
 				)
 			);
+			$this->redirect(array('controller' => 'customers', 'action' => 'index'));
+		}
+		$idx=$this->Pet->findByid($id);
+		if(!sizeof($idx) > 0){
+			$this->redirect(array('controller' => 'customers', 'action' => 'index'));
 		}
 		if($this->request->is('post')){
 			$this->Pet->id=$id;
@@ -24,6 +29,7 @@ class ServicesController extends AppController{
 						'key' => 'positive'
 					)
 				);
+				$this->redirect(array('controller'=> 'services','action' => 'availservices/'.$id));
 			}else{
 				$message= 'Error! You need pet id inorder to add services!';
 					$this->Flash->error($message);
@@ -41,6 +47,11 @@ class ServicesController extends AppController{
 		if(!$id){
 			$message= 'Error! You need an id inorder to view Availed Services' ;
 			$this->Flash->error($message);
+		}
+
+		$idx=$this->Pet->findByid($id);
+		if(!sizeof($idx) > 0){
+			$this->redirect(array('controller' => 'customers', 'action' => 'index'));
 		}
 		isset($id) ? $id : $this->redirect(array('controller' => 'customers', 'action' => 'index'));
 		$id = $this->request->pass[0];
@@ -72,8 +83,10 @@ class ServicesController extends AppController{
 		if(!$id){
 			$this->redirect(array('controller' => 'customers','action' => 'index'));
 		}
-		pr('HALLOWEEN');
-		exit;
+		$idx=$this->Service->findByid($id);
+		if(!sizeof($idx) > 0){
+			$this->redirect(array('controller' => 'customers', 'action' => 'index'));
+		}
 		if($this->request->is('post')){
 			$this->Service->id=$id;
 			if($this->Service->save($this->request->data)){
